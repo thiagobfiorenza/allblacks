@@ -41,12 +41,17 @@ class ClientController extends Controller
         $request->validate([
             'name' => 'required',
             'document' => 'required',
+            'postcode' => 'required',
+            'address' => 'required',
+            'district' => 'required',
+            'city' => 'required',
+            'state' => 'required'
         ]);
 
         Client::create($request->all());
 
         return redirect()->route('clients.index')
-            ->with('success','Torcedor criado com sucesso.');
+            ->with('success', 'Torcedor criado com sucesso.');
     }
 
     /**
@@ -83,12 +88,17 @@ class ClientController extends Controller
         $request->validate([
             'name' => 'required',
             'document' => 'required',
+            'postcode' => 'required',
+            'address' => 'required',
+            'district' => 'required',
+            'city' => 'required',
+            'state' => 'required'
         ]);
 
         $client->update($request->all());
 
         return redirect()->route('clients.index')
-            ->with('success','Torcedor alterado com sucesso');
+            ->with('success', 'Torcedor alterado com sucesso.');
     }
 
     /**
@@ -102,6 +112,6 @@ class ClientController extends Controller
         $client->delete();
 
         return redirect()->route('clients.index')
-            ->with('success','Torcedor excluído com sucesso');
+            ->with('success', 'Torcedor excluído com sucesso.');
     }
 }
