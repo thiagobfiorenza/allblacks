@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Client;
 use App\Exports\ClientsExport;
+use App\Mail\SendMailUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ClientController extends Controller
@@ -39,24 +41,65 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
+        // If is a XML import
         if (!empty($request->files->get('file'))) {
             $clients = simplexml_load_file($request->files->get('file'));
+            $clients = json_decode(json_encode((array) $clients), true);
+            $countCreated = 0;
+            $countUpdated = 0;
+
+            foreach ($clients['torcedor'] as $client) {
+                $arrReplace = [
+                    'name' => $client['@attributes']['nome'],
+                    'document' => $client['@attributes']['documento'],
+                    'postcode' => $client['@attributes']['cep'],
+                    'address' => $client['@attributes']['endereco'],
+                    'district' => $client['@attributes']['bairro'],
+                    'city' => $client['@attributes']['cidade'],
+                    'state' => $client['@attributes']['uf'],
+                    'telephone' => $client['@attributes']['telefone'],
+                    'email' => $client['@attributes']['email'],
+                    'active' => $client['@attributes']['ativo'] ? 1 : 0,
+                ];
+                // Verify if document is unique to save only different data
+                $find = Client::where('document', '=', $client['@attributes']['documento'])->first();
+                if (!empty($find)) {
+                    $countUpdated++;
+
+                    $arrReplace['id'] = $find->id;
+                } else {
+                    $countCreated++;
+                }
+                $request->replace($arrReplace);
+
+                $request->validate([
+                    'name' => 'required',
+                    'document' => 'required',
+                    'postcode' => 'required',
+                    'address' => 'required',
+                    'district' => 'required',
+                    'city' => 'required',
+                    'state' => 'required'
+                ]);
+                Client::updated($request->all());
+
+                $msg = $countCreated . ' torcedor(es) criado(s) e ' . $countUpdated . ' atualizado(s) com sucesso.';
+            }
+        } else {
+            $request->validate([
+                'name' => 'required',
+                'document' => 'required|unique:clients',
+                'postcode' => 'required',
+                'address' => 'required',
+                'district' => 'required',
+                'city' => 'required',
+                'state' => 'required'
+            ]);
+            Client::create($request->all());
+            $msg = 'Torcedor criado com sucesso.';
         }
 
-        $request->validate([
-            'name' => 'required',
-            'document' => 'required',
-            'postcode' => 'required',
-            'address' => 'required',
-            'district' => 'required',
-            'city' => 'required',
-            'state' => 'required'
-        ]);
-
-        Client::create($request->all());
-
-        return redirect()->route('clients.index')
-            ->with('success', 'Torcedor criado com sucesso.');
+        return redirect()->route('clients.index')->with('success', $msg);
     }
 
     /**
@@ -106,23 +149,6 @@ class ClientController extends Controller
         return view('clients.import');
     }
 
-    public function toFrom($client)
-    {
-        return [
-            'name' => $client['nome'],
-            'document' => $client['documento'],
-            'postcode' => $client['cep'],
-            'address' => $client['endereco'],
-            'district' => $client['bairro'],
-            'city' => $client['cidade'],
-            'state' => $client['uf'],
-            'telephone' => $client['telefone'],
-            'email' => $client['email'],
-            'active' => $client['ativo'],
-        ];
-    }
-
-
     /**
      * Export clients to a Excel file.
      *
@@ -131,5 +157,12 @@ class ClientController extends Controller
     public function export()
     {
         return Excel::download(new ClientsExport(), 'clientes.xlsx');
+    }
+
+    public function send()
+    {
+        Mail::to('thiagobfiorenza@gmail.com')->send(new SendMailUser());
+
+        return redirect()->route('clients.index')->with('success', 'Comunicado enviado para os torcedores com sucesso.');
     }
 }

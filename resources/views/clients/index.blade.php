@@ -66,11 +66,14 @@
             <div class="pull-left">
                 {!! $clients->links() !!}
             </div>
-            {{--<div class="pull-right">--}}
-                {{--<a class="btn btn-info" href="{{ route('clients.import') }}">Importar XML</a>--}}
-            {{--</div>--}}
+            <div class="pull-right">
+                <a class="btn btn-info" href="{{ route('clients.import') }}">Importar XML</a>
+            </div>
             <div class="pull-right">
                 <a class="btn btn-info" href="{{ route('clients.export') }}">Exportar Excel</a>
+            </div>
+            <div class="pull-right">
+                <a class="btn btn-info" href="{{ route('clients.send') }}">Enviar Comunicado</a>
             </div>
         </div>
     </div>

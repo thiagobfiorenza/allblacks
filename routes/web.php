@@ -22,4 +22,5 @@ Route::resourceVerbs([
 
 Route::get('clients/export', 'ClientController@export')->name('clients.export');
 Route::get('clients/import', 'ClientController@import')->name('clients.import');
+Route::get('clients/send', 'ClientController@send')->name('clients.send');
 Route::resource('clients', 'ClientController');

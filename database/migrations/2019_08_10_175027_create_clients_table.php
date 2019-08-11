@@ -22,7 +22,7 @@ class CreateClientsTable extends Migration
             $table->string('district', 255);
             $table->string('city', 255);
             $table->string('state', 2);
-            $table->string('telephone', 14)->nullable();
+            $table->string('telephone', 15)->nullable();
             $table->string('email', 255)->nullable();
             $table->boolean('active');
             $table->timestamps();
