@@ -30,43 +30,43 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <label for="name">Nome:</label>
+                    <label for="name">Nome*:</label>
                     <input type="text" name="name" value="{{ $client->name }}" class="form-control" placeholder="Nome">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <label for="document">Documento:</label>
+                    <label for="document">Documento*:</label>
                     <input type="text" name="document" value="{{ $client->document }}" class="form-control" placeholder="Documento">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <label for="postcode">CEP:</label>
+                    <label for="postcode">CEP*:</label>
                     <input type="text" name="postcode" value="{{ $client->postcode }}" class="form-control" placeholder="CEP">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <label for="address">Endereço:</label>
+                    <label for="address">Endereço*:</label>
                     <input type="text" name="address" value="{{ $client->address }}" class="form-control" placeholder="Endereço">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <label for="district">Bairro:</label>
+                    <label for="district">Bairro*:</label>
                     <input type="text" name="district" value="{{ $client->district }}" class="form-control" placeholder="Bairro">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <label for="city">Cidade:</label>
+                    <label for="city">Cidade*:</label>
                     <input type="text" name="city" value="{{ $client->city }}" class="form-control" placeholder="Cidade">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <label for="state">UF:</label>
+                    <label for="state">UF*:</label>
                     <select name="state" class="form-control" title="UF">
                         <option value="">Selecione</option>
                         <option value="AC"{{ $client->state == 'AC' ? 'selected' : ''}}>Acre</option>

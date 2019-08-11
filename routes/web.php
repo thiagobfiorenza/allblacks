@@ -15,6 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('clients','ClientController');
+Route::resourceVerbs([
+    'create' => 'novo',
+    'edit' => 'editar',
+]);
 
-
+Route::get('clients/export', 'ClientController@export')->name('clients.export');
+Route::get('clients/import', 'ClientController@import')->name('clients.import');
+Route::resource('clients', 'ClientController');

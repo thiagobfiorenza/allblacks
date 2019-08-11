@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Client;
+use App\Exports\ClientsExport;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ClientController extends Controller
 {
@@ -14,10 +16,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::latest()->paginate(5);
+        $clients = Client::orderBy('name')->paginate(10);
 
-        return view('clients.index',compact('clients'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+        return view('clients.index',compact('clients'))->with('i', (request()->input('page', 1) - 1) * 10);
     }
 
     /**
@@ -38,6 +39,10 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
+        if (!empty($request->files->get('file'))) {
+            $clients = simplexml_load_file($request->files->get('file'));
+        }
+
         $request->validate([
             'name' => 'required',
             'document' => 'required',
@@ -77,31 +82,6 @@ class ClientController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Client  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Client $client)
-    {
-        $request->validate([
-            'name' => 'required',
-            'document' => 'required',
-            'postcode' => 'required',
-            'address' => 'required',
-            'district' => 'required',
-            'city' => 'required',
-            'state' => 'required'
-        ]);
-
-        $client->update($request->all());
-
-        return redirect()->route('clients.index')
-            ->with('success', 'Torcedor alterado com sucesso.');
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Client  $product
@@ -113,5 +93,43 @@ class ClientController extends Controller
 
         return redirect()->route('clients.index')
             ->with('success', 'Torcedor excluído com sucesso.');
+    }
+
+    /**
+     * Import a XML file.
+     *
+     * @param  \App\Client  $product
+     * @return \Illuminate\Http\Response
+     */
+    public function import()
+    {
+        return view('clients.import');
+    }
+
+    public function toFrom($client)
+    {
+        return [
+            'name' => $client['nome'],
+            'document' => $client['documento'],
+            'postcode' => $client['cep'],
+            'address' => $client['endereco'],
+            'district' => $client['bairro'],
+            'city' => $client['cidade'],
+            'state' => $client['uf'],
+            'telephone' => $client['telefone'],
+            'email' => $client['email'],
+            'active' => $client['ativo'],
+        ];
+    }
+
+
+    /**
+     * Export clients to a Excel file.
+     *
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
+    public function export()
+    {
+        return Excel::download(new ClientsExport(), 'clientes.xlsx');
     }
 }
