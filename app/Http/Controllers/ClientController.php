@@ -192,14 +192,14 @@ class ClientController extends Controller
     }
 
     /**
-     * Send a mail to all active clients.
+     * Send a mail to all active and with email clients.
      *
      * @param Request $request
      * @return $this
      */
     public function send(Request $request)
     {
-        $clients = Client::where('active', '=', 1)->get();
+        $clients = Client::where('active', '=', 1)->where('email', '!=', '')->orWhere('email', '!=', null)->get();
         $arrTo = [];
         foreach ($clients as $client) {
             $arrTo[] = $client->email;
