@@ -73,7 +73,7 @@
                 <a class="btn btn-info" href="{{ route('clients.export') }}">Exportar Excel</a>
             </div>
             <div class="pull-right">
-                <a class="btn btn-info" href="{{ route('clients.send') }}">Enviar Comunicado</a>
+                <a class="btn btn-info" href="{{ route('clients.mail') }}">Enviar Comunicado</a>
             </div>
         </div>
     </div>

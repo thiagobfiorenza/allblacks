@@ -12,7 +12,7 @@ use Maatwebsite\Excel\Facades\Excel;
 class ClientController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the clients.
      *
      * @return \Illuminate\Http\Response
      */
@@ -24,7 +24,7 @@ class ClientController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new client.
      *
      * @return \Illuminate\Http\Response
      */
@@ -34,7 +34,7 @@ class ClientController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created client in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -103,7 +103,7 @@ class ClientController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified client.
      *
      * @param  \App\Client  $product
      * @return \Illuminate\Http\Response
@@ -114,7 +114,7 @@ class ClientController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified client.
      *
      * @param  \App\Client  $product
      * @return \Illuminate\Http\Response
@@ -125,7 +125,7 @@ class ClientController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified client from storage.
      *
      * @param  \App\Client  $product
      * @return \Illuminate\Http\Response
@@ -139,10 +139,9 @@ class ClientController extends Controller
     }
 
     /**
-     * Import a XML file.
+     * Show the form for import a XML.
      *
-     * @param  \App\Client  $product
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function import()
     {
@@ -159,10 +158,32 @@ class ClientController extends Controller
         return Excel::download(new ClientsExport(), 'clientes.xlsx');
     }
 
-    public function send()
+    /**
+     * Show the form for creating a new mail.
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function mail()
     {
-        Mail::to('thiagobfiorenza@gmail.com')->send(new SendMailUser());
+        return view('clients.mail');
+    }
 
-        return redirect()->route('clients.index')->with('success', 'Comunicado enviado para os torcedores com sucesso.');
+    /**
+     * Send a mail to all active clients.
+     *
+     * @param Request $request
+     * @return $this
+     */
+    public function send(Request $request)
+    {
+        $clients = Client::where('active', '=', 1)->get();
+        $arrTo = [];
+        foreach ($clients as $client) {
+            $arrTo[] = $client->email;
+        }
+
+        Mail::bcc($arrTo)->send(new SendMailUser($request));
+
+        return redirect()->route('clients.index')->with('success',
+            'Comunicado enviado para todos os torcedores ativos.');
     }
 }
