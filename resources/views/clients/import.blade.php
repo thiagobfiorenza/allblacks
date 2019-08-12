@@ -3,6 +3,9 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
+            <div class="pull-left">
+                <h3>Importar Torcedores - All Blacks</h3>
+            </div>
             <div class="pull-right">
                 <a class="btn btn-primary" href="{{ route('clients.index') }}"> Voltar</a>
             </div>

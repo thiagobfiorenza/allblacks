@@ -1,0 +1,25 @@
+body {
+	background-color: #030303 !important;
+	background-image: url('../img/bg_allblacks.jpg') !important;
+	background-position: bottom center !important;
+	background-repeat: no-repeat !important;
+	background-size: 1360px !important;
+	padding-bottom: 900px !important;
+}
+
+.container {
+	background-color: #FFFFFF;
+	border: 2px solid #CCCCCC;
+	border-radius: 15px;
+	padding-bottom: 20px;
+	padding-top: 20px;
+	margin-top: 20px;
+}
+
+.container .buttons .mr-1 {
+	margin-right: 10px;
+}
+
+.container .buttons .mt-1 {
+	margin-top: 15px;
+}

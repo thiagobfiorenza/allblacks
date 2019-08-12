@@ -125,6 +125,30 @@ class ClientController extends Controller
     }
 
     /**
+     * Update the specified client in storage.
+     *
+     * @param Request $request
+     * @param Client $client
+     * @return $this
+     */
+    public function update(Request $request, Client $client)
+    {
+        $request->validate([
+            'name' => 'required',
+            'document' => 'required',
+            'postcode' => 'required',
+            'address' => 'required',
+            'district' => 'required',
+            'city' => 'required',
+            'state' => 'required'
+        ]);
+        $client->update($request->all());
+
+        return redirect()->route('clients.index')
+            ->with('success', 'Torcedor alterado com sucesso.');
+    }
+
+    /**
      * Remove the specified client from storage.
      *
      * @param  \App\Client  $product

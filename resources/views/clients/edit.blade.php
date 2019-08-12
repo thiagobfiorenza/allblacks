@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Editar Torcedores</h2>
+                <h3>Editar Torcedor - All Blacks</h3>
             </div>
             <div class="pull-right">
                 <a class="btn btn-primary" href="{{ route('clients.index') }}"> Voltar</a>
@@ -69,33 +69,33 @@
                     <label for="state">UF*:</label>
                     <select name="state" class="form-control" title="UF">
                         <option value="">Selecione</option>
-                        <option value="AC"{{ $client->state == 'AC' ? 'selected' : ''}}>Acre</option>
-                        <option value="AL">Alagoas</option>
-                        <option value="AP">Amapá</option>
-                        <option value="AM">Amazonas</option>
-                        <option value="BA">Bahia</option>
-                        <option value="CE">Ceará</option>
-                        <option value="DF">Distrito Federal</option>
-                        <option value="ES">Espírito Santo</option>
-                        <option value="GO">Goiás</option>
-                        <option value="MA">Maranhão</option>
-                        <option value="MT">Mato Grosso</option>
-                        <option value="MS">Mato Grosso do Sul</option>
-                        <option value="MG">Minas Gerais</option>
-                        <option value="PA">Pará</option>
-                        <option value="PB">Paraíba</option>
+                        <option value="AC"{{ $client->state == 'AC' ? ' selected' : ''}}>Acre</option>
+                        <option value="AL"{{ $client->state == 'AL' ? ' selected' : ''}}>Alagoas</option>
+                        <option value="AP"{{ $client->state == 'AP' ? ' selected' : ''}}>Amapá</option>
+                        <option value="AM"{{ $client->state == 'AM' ? ' selected' : ''}}>Amazonas</option>
+                        <option value="BA"{{ $client->state == 'BA' ? ' selected' : ''}}>Bahia</option>
+                        <option value="CE"{{ $client->state == 'CE' ? ' selected' : ''}}>Ceará</option>
+                        <option value="DF"{{ $client->state == 'DF' ? ' selected' : ''}}>Distrito Federal</option>
+                        <option value="ES"{{ $client->state == 'ES' ? ' selected' : ''}}>Espírito Santo</option>
+                        <option value="GO"{{ $client->state == 'GO' ? ' selected' : ''}}>Goiás</option>
+                        <option value="MA"{{ $client->state == 'MA' ? ' selected' : ''}}>Maranhão</option>
+                        <option value="MT"{{ $client->state == 'MT' ? ' selected' : ''}}>Mato Grosso</option>
+                        <option value="MS"{{ $client->state == 'MS' ? ' selected' : ''}}>Mato Grosso do Sul</option>
+                        <option value="MG"{{ $client->state == 'MG' ? ' selected' : ''}}>Minas Gerais</option>
+                        <option value="PA"{{ $client->state == 'PA' ? ' selected' : ''}}>Pará</option>
+                        <option value="PB"{{ $client->state == 'PB' ? ' selected' : ''}}>Paraíba</option>
                         <option value="PR"{{ $client->state == 'PR' ? ' selected' : ''}}>Paraná</option>
-                        <option value="PE">Pernambuco</option>
-                        <option value="PI">Piauí</option>
-                        <option value="RJ">Rio de Janeiro</option>
-                        <option value="RN">Rio Grande do Norte</option>
-                        <option value="RS">Rio Grande do Sul</option>
-                        <option value="RO">Rondônia</option>
-                        <option value="RR">Roraima</option>
-                        <option value="SC">Santa Catarina</option>
-                        <option value="SP">São Paulo</option>
-                        <option value="SE">Sergipe</option>
-                        <option value="TO">Tocantins</option>
+                        <option value="PE"{{ $client->state == 'PE' ? ' selected' : ''}}>Pernambuco</option>
+                        <option value="PI"{{ $client->state == 'PI' ? ' selected' : ''}}>Piauí</option>
+                        <option value="RJ"{{ $client->state == 'RJ' ? ' selected' : ''}}>Rio de Janeiro</option>
+                        <option value="RN"{{ $client->state == 'RN' ? ' selected' : ''}}>Rio Grande do Norte</option>
+                        <option value="RS"{{ $client->state == 'RS' ? ' selected' : ''}}>Rio Grande do Sul</option>
+                        <option value="RO"{{ $client->state == 'RO' ? ' selected' : ''}}>Rondônia</option>
+                        <option value="RR"{{ $client->state == 'RR' ? ' selected' : ''}}>Roraima</option>
+                        <option value="SC"{{ $client->state == 'SC' ? ' selected' : ''}}>Santa Catarina</option>
+                        <option value="SP"{{ $client->state == 'SP' ? ' selected' : ''}}>São Paulo</option>
+                        <option value="SE"{{ $client->state == 'SE' ? ' selected' : ''}}>Sergipe</option>
+                        <option value="TO"{{ $client->state == 'TO' ? ' selected' : ''}}>Tocantins</option>
                     </select>
                 </div>
             </div>
@@ -120,7 +120,7 @@
                     </select>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+            <div class="col-xs-12 col-sm-12 col-md-12 text-right">
                 <button type="submit" class="btn btn-primary">Salvar</button>
             </div>
         </div>

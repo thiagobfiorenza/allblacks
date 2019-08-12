@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>All Blacks</h2>
+                <h3>Lista de Torcedores - All Blacks</h3>
             </div>
             <div class="pull-right">
                 <a class="btn btn-success" href="{{ route('clients.create') }}"> Novo Torcedor</a>
@@ -34,7 +34,7 @@
                 <td>{{ ++$i }}</td>
                 <td>{{ $client->name }}</td>
                 <td>{{ $client->document }}</td>
-                <td>{{ $client->city . ' -' . $client->state}}</td>
+                <td>{{ $client->city . ' - ' . $client->state}}</td>
                 <td>{{ $client->telephone}}</td>
                 <td>{{ $client->email}}</td>
                 <td>{{ $client->active ? 'Ativo' : 'Inativo'}}</td>
@@ -61,23 +61,20 @@
         @endforeach
     </table>
 
-    <div class="row">
+    <div class="row buttons">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
                 {!! $clients->links() !!}
             </div>
-            <div class="pull-right">
-                <a class="btn btn-info" href="{{ route('clients.import') }}">Importar XML</a>
-            </div>
-            <div class="pull-right">
+            <div class="pull-right mt-1">
                 <a class="btn btn-info" href="{{ route('clients.export') }}">Exportar Excel</a>
             </div>
-            <div class="pull-right">
-                <a class="btn btn-info" href="{{ route('clients.mail') }}">Enviar Comunicado</a>
+            <div class="pull-right mt-1 mr-1">
+                <a class="btn btn-primary" href="{{ route('clients.import') }}">Importar XML</a>
+            </div>
+            <div class="pull-right mt-1 mr-1">
+                <a class="btn btn-success" href="{{ route('clients.mail') }}">Enviar Comunicado</a>
             </div>
         </div>
     </div>
-
-
-
 @endsection

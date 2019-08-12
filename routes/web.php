@@ -11,9 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::resourceVerbs([
     'create' => 'novo',
@@ -25,3 +22,5 @@ Route::get('clients/import', 'ClientController@import')->name('clients.import');
 Route::post('clients/send', 'ClientController@send')->name('clients.send');
 Route::get('clients/mail', 'ClientController@mail')->name('clients.mail');
 Route::resource('clients', 'ClientController');
+
+Route::get('/', 'ClientController@index');
