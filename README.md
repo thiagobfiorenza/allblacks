@@ -26,7 +26,7 @@ php artisan migrate
 - [x] Foi criada a funcionalidade de envio de comunicados, onde deve-se preencher o assunto do e-mail e a mensagem e o sistema envia o comunicado para todos os torcedores que possuirem e-mail e estiverem ativos no sistema;
 - [x] E por fim, como o controle anteriormente era feito via Excel, basta apenas um clique para que uma planilha com a informação de todos os torcedores seja criada.
 
-## Este projeto almeja resolver o seguinte problema
+## Este projeto almeja resolver os seguintes problemas
 
 -	Seleção Neozelandesa de Rugby é o cliente;
 -	Os All Blacks possuem uma base de torcedores em planilha Excel;
